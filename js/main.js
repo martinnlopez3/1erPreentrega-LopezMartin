@@ -1,5 +1,15 @@
 let nombreUsuario = prompt("ingrese un nombre de usuario.")
+
+function Hamburguesa(descripcion,precio) {
+    this.descripcion = descripcion,
+    this.precio = precio
+};
+
+let total = 0;
+
 let menuHamburguesa = [];
+
+let carrito = [];
 
 console.log(nombreUsuario)
 while (nombreUsuario.length < 6){
@@ -13,33 +23,48 @@ alert("Bienvenido a Flamas! " + nombreUsuario);
 let menu = hamburguesa();
     console.log(menu);
 
-while (!menuHamburguesa.includes(menu)){
-    alert("Error! ingreso una opcion incorrecta")
+while (menu< menuHamburguesa.length){
+    total += menuHamburguesa[menu].precio
+    carrito.push(menuHamburguesa[menu])
+    alert("seleccionaste: " + menuHamburguesa[menu].descripcion + ", $" + menuHamburguesa[menu].precio + "\n Total: $" + total)
+
     menu = hamburguesa();
 }
 
-if (menu == menuHamburguesa[0])
-    alert("seleccionaste: " + menuHamburguesa[0] + ", llevas un total de $3000")
-else if (menu == menuHamburguesa[1])
-    alert("seleccionaste: " + menuHamburguesa[1] + ", lleva un total de $3500")  
-else if (menu == menuHamburguesa[2])
-    alert("seleccionaste: " + menuHamburguesa[2]+ ", lleva un total de $3800")
-else if (menu == menuHamburguesa[3])
-    alert("seleccionaste: " + menuHamburguesa[3] + ", lleva un total de $4000")  
+// if (menu == menuHamburguesa[0])
+//     alert("seleccionaste: " + menuHamburguesa[0].descripcion + ", llevas un total de $" + menuHamburguesa[0].precio)
+// else if (menu == menuHamburguesa[1])
+//     alert("seleccionaste: " + menuHamburguesa[1].descripcion + ", lleva un total de $" + menuHamburguesa[1].precio)  
+// else if (menu == menuHamburguesa[2])
+//     alert("seleccionaste: " + menuHamburguesa[2].descripcion+ ", lleva un total de $" + menuHamburguesa[2].precio)
+// else if (menu == menuHamburguesa[3])
+//     alert("seleccionaste: " + menuHamburguesa[3].descripcion + ", lleva un total de $" + menuHamburguesa[3].precio)  
 
-alert("Pedido listo! que lo disfrutes")
+alert("Pedido listo! que lo disfrutes \n" + pedido(carrito))
+
+function pedido(hamburguesa){
+    let mensaje = "";
+    for (let i = 0; i<hamburguesa.length; i++){
+        console.log(hamburguesa[i])
+        mensaje += hamburguesa[i].descripcion + " $" + hamburguesa[i].precio + "\n";
+
+    }
+
+    return mensaje;
+
+}
 
 function hamburguesa(){
     menuHamburguesa = [];
-    menuHamburguesa.push("hamburguesa 01")
-    menuHamburguesa.push("hamburguesa 02")
-    menuHamburguesa.push("hamburguesa 03")
-    menuHamburguesa.push("hamburguesa 04")
+    menuHamburguesa.push(new Hamburguesa("hamburguesa 01", 3000))
+    menuHamburguesa.push(new Hamburguesa("hamburguesa 02", 3500))
+    menuHamburguesa.push(new Hamburguesa("hamburguesa 03", 3800))
+    menuHamburguesa.push(new Hamburguesa("hamburguesa 04", 4000))
 
     let mensaje = "Que te servimos hoy?: \n";
     
     for (let i = 0; i<menuHamburguesa.length; i++){
-        mensaje += menuHamburguesa[i]+ "\n";
+        mensaje += i+": " + menuHamburguesa[i].descripcion + " $" + menuHamburguesa[i].precio + "\n";
     }
 
     return prompt(mensaje);
